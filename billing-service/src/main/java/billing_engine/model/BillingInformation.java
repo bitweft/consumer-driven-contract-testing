@@ -11,4 +11,16 @@ public class BillingInformation {
     private long planEndDate;
     @Id
     private String userId;
+
+    String getUserId() {
+        return userId;
+    }
+
+    long getPlanStartDate() {
+        return planStartDate;
+    }
+
+    long getPlanEndDate() {
+        return planEndDate;
+    }
 }
