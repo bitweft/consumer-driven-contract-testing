@@ -1,3 +1,5 @@
 .idea/*
 billing-service/.gradle/
 billing-service/build/
+user-privilege-service/.gradle/
+user-privilege-service/build/
