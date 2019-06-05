@@ -1,2 +1,3 @@
 .idea/*
 billing-service/.gradle/
+billing-service/build/
