@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import user_privilege_engine.model.UserBillingInformation;
+import user_privilege_engine.model.UserPrivilegeInformation;
 import user_privilege_engine.service.UserPrivilegeService;
 
 @Controller
@@ -16,7 +16,7 @@ public class UserPrivilegeController {
 
     @GetMapping("/user-privilege")
     @ResponseBody
-    public UserBillingInformation getUserPrivilege(@RequestParam(name = "userId") String userId) {
+    public UserPrivilegeInformation getUserPrivilege(@RequestParam(name = "userId") String userId) {
         return userPrivilegeService.getUserPrivilege(userId);
     }
 }
