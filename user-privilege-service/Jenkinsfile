@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    stages {
+        stage('Unit Tests') {
+            steps {
+                dir("user-privilege-service") {
+                    sh './gradlew clean test --tests "*user_privilege_engine.unit*"'
+                }
+            }
+        }
+        stage('Pact Tests') {
+             steps {
+                 dir("user-privilege-service") {
+                    sh './gradlew clean test --tests "*user_privilege_engine.pact*"'
+                    archiveArtifacts artifacts: 'build/pacts/*.json'
+                 }
+
+             }
+        }
+        stage('Publish Pact') {
+            steps {
+                dir("user-privilege-service") {
+                    sh "curl -v -XPUT -H 'Content-Type: application/json' \
+                        -d@build/pacts/userPrivilegeService-billingService.json \
+                        http://localhost:9292/pacts/provider/billingService/consumer/userPrivilegeService/version/${GIT_COMMIT}"
+                }
+
+            }
+        }
+    }
+}
