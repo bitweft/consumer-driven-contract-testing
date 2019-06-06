@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+    stages {
+        stage('Pact Test') {
+            steps {
+                dir("billing-service") {
+                    sh "./gradlew clean test"
+                }
+            }
+        }
+    }
+}
