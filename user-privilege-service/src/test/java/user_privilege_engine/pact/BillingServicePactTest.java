@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+import user_privilege_engine.model.UserBillingInformation;
 import user_privilege_engine.model.UserPrivilegeInformation;
 import user_privilege_engine.service.ApiGateway;
 
@@ -58,7 +59,7 @@ public class BillingServicePactTest extends ConsumerPactTestMk2 {
     @Override
     protected void runTest(MockServer mockServer, PactTestExecutionContext context) {
         apiGateway.overrideBaseUrl(mockServer.getUrl());
-        UserPrivilegeInformation userPrivilegeInformation = apiGateway.getBillingInformationForUser("user1");
-        assertEquals("active", userPrivilegeInformation.getStatus());
+        UserBillingInformation userBillingInformation = apiGateway.getBillingInformationForUser("user1");
+        assertEquals("active", userBillingInformation.getStatus());
     }
 }

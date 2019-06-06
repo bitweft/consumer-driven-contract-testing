@@ -1,23 +1,31 @@
 package user_privilege_engine.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.boot.jackson.JsonComponent;
 
 @JsonComponent
 public class UserPrivilegeInformation {
-    @JsonProperty("userId")
     private String userId;
+    private Privilege privilege;
 
-    @JsonProperty("Status")
-    private String status;
+    public UserPrivilegeInformation() {
+    }
 
-    private Privilege privilege = Privilege.getInstance(status);
+    private UserPrivilegeInformation(String userId, Privilege privilege) {
+        this.userId = userId;
+        this.privilege = privilege;
+    }
+
+    public static UserPrivilegeInformation getUserPrivilegeInformationFrom(String userId, UserBillingInformation userBillingInfo) {
+        Privilege privilege = Privilege.getInstance(userBillingInfo.getStatus());
+
+        return new UserPrivilegeInformation(userId, privilege);
+    }
+
+    public String getUserId() {
+        return userId;
+    }
 
     public Privilege getPrivilege() {
         return privilege;
-    }
-
-    public String getStatus() {
-        return status;
     }
 }
